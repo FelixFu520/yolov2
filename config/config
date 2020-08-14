@@ -1,0 +1,72 @@
+
+---------------------------------------------train时，config的解释，运行代码时不需要此文件
+
+------------------------数据集 & 数据加载
+dataset='voc0712trainval'                           选择数据集配置，voc07train，voc07trainval，voc0712trainval
+imdb_name = 'voc_2007_trainval+voc_2012_trainval'   图像数据集train
+imdbval_name ='voc_2007_test'                       图像数据集val
+num_workers=8
+----图片处理
+cfg.input_size                                      input_size = (416, 416)
+cfg.test_input_size                                 test_input_size = (416, 416)
+
+
+------------------------训练
+args.pretrained_model                               训练开始的权重
+lr=0.0001                                           学习率
+batch_size=16                                       batchsize
+max_epochs=160                                      训练总的epochs
+start_epoch=1                                       开始的epoch
+checkpoint_epoch=160                                多少epoch开始checkpoint
+display_interval=10                                 多少次显示输出
+resume=False                                        是否checkpoint
+args.checkpoint_epoch                               resume的权重
+save_interval=20                                    多少次存储
+args.decay_lrs                                      学习率衰减列表
+
+cfg.multi_scale                                     是否多尺度训练
+                                                            # multi-scale training:
+                                                            # {k: epoch, v: scale range}
+                                                            multi_scale = True
+cfg.epoch_scale                                     多尺度训练
+                                                            epoch_scale = {
+                                                                1:  (3, 4),
+                                                                15: (2, 5),
+                                                                30: (1, 6),
+                                                                60: (0, 7),
+                                                                75: (0, 9)
+                                                            }
+cfg.scale_range                                     (3, 4)
+cfg.scale_step=40                                   # number of steps to change input size
+
+
+
+------------------------优化器
+momentum=0.9                                        优化器
+weight_decay=0.0005                                 优化器衰减
+
+
+------------------------tensorboard
+use_tfboard=False                                   是否使用tensorboard
+exp_name='default'                                  默认设置
+
+
+-----------------------模型保存等输出目录
+output_dir='output'                                 输出目录
+decay_lrs={60: 1e-05, 90: 1e-06}
+
+
+
+
+-----------------------GPU相关
+mGPUs=False
+use_cuda=False
+
+
+
+
+
+
+
+
+
